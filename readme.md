@@ -1,7 +1,3 @@
-Certainly! Here's an example of the NPM documentation for the `abex_react` package, including usage of the `AbexProvider`, `AbexSwitch`, and `AbexCase` components:
-
----
-
 # abex_react
 
 The `abex_react` package provides a set of components for handling A/B experiments in React applications.
