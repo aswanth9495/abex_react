@@ -2,16 +2,16 @@
 // import { ABEX_API_BASE_URL } from '../utils/constants';
 
 export function fetchVariant({
-  experimentKey,
-  experimentData,
+  token,
+  flags,
 }: {
-  experimentKey: string
-  experimentData: any
+  token: string
+  flags: object
 }): {
   data: {
-    variant_key: string
-    experimentKey: string
-    experimentData: any
+    variant_key: string,
+    token: string,
+    flags: object
   }
 } {
   // return apiRequest(
@@ -24,9 +24,9 @@ export function fetchVariant({
   // );
   return {
     data: {
-      variant_key: 'sample_variant123',
-      experimentKey,
-      experimentData,
-    },
+      variant_key: 'A', 
+      token,
+      flags
+    }
   }
 }

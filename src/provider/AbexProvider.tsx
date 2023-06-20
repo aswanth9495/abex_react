@@ -5,15 +5,20 @@ import { AbexContext } from '../context'
 interface AbexProviderProps {
   experimentKey: string
   experimentData: any
+  onInit?: (client: AbexClient) => void;
   children: React.ReactNode
 }
 
-const AbexProvider: React.FC<AbexProviderProps> = ({ experimentKey, experimentData, children }) => {
-  const [variantKey, setVariantKey] = useState<string | null>(null)
+const AbexProvider: React.FC<AbexProviderProps> = ({ experimentKey, experimentData, onInit, children }) => {
+  const [variantKey, setVariantKey] = useState<string | null>(null);
+  const abexClient = new AbexClient(experimentKey, experimentData, async (client) => {
+    if (onInit && typeof onInit === 'function') {
+      onInit(client);
+    }
+  });
 
   useEffect(() => {
     async function fetchVariantKey() {
-      const abexClient = new AbexClient(experimentKey, experimentData)
       const key = await abexClient.getVariantKey()
       setVariantKey(key)
       // You can store other variant details as well

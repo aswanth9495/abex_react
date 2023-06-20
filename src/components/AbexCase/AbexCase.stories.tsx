@@ -19,5 +19,5 @@ type Story = StoryObj<typeof AbexCase>;
 */
 export const Default: Story = {
   name: 'Example',
-  render: () => <AbexCase >Sample case</AbexCase>,
+  render: () => <AbexCase variant="sample_variant" >Sample case</AbexCase>,
 };
