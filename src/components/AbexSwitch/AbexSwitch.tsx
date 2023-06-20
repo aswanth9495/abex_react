@@ -2,8 +2,10 @@ import React, { useContext, ReactNode } from 'react';
 import { AbexContext } from '../../context';
 
 interface AbexSwitchProps {
-  children: ReactNode[];
+  experimentKey: string;
+  children: ReactNode;
 }
+
 
 /**
  * The AbexSwitch component is a higher-level component 
@@ -12,14 +14,17 @@ interface AbexSwitchProps {
  * conditionally render the appropriate content based 
  * on the assigned variant key.
  */
-export default function AbexSwitch({ children }: AbexSwitchProps): JSX.Element | null {
-  const variant = useContext(AbexContext);
+
+const AbexSwitch: React.FC<AbexSwitchProps> = ({ experimentKey, children }) => {
+  const variantKeys = useContext(AbexContext);
+
+  const variantKey = variantKeys[experimentKey] || null;
 
   let selectedCase: ReactNode = null;
   React.Children.forEach(children, (child) => {
     if (React.isValidElement(child)) {
       const childProps = child.props as { variant?: string };
-      if (childProps.variant === variant) {
+      if (childProps.variant === variantKey) {
         selectedCase = child;
       }
       if (childProps.variant === 'default' && !selectedCase) {
@@ -29,4 +34,6 @@ export default function AbexSwitch({ children }: AbexSwitchProps): JSX.Element |
   });
 
   return selectedCase || null;
-}
+};
+
+export default AbexSwitch;

@@ -21,7 +21,7 @@ type Story = StoryObj<typeof AbexSwitch>;
  */
 export const Default: Story = {
   name: 'Example',
-  render: () => <AbexSwitch>
+  render: () => <AbexSwitch experimentKey="experiment1">
     <AbexCase variant="default">Default Case</AbexCase>
     <AbexCase variant="sample_variant">Sample Case</AbexCase>
   </AbexSwitch>,

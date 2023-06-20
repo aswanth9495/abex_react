@@ -1,32 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import AbexClient from '../utils/abexClient'
-import { AbexContext } from '../context'
+import React, { useEffect, useState } from 'react';
+import AbexClient from '../utils/abexClient';
+import { AbexContext } from '../context';
 
 interface AbexProviderProps {
-  experimentKey: string
-  experimentData: any
+  experiments: {experimentKey: string, experimentData: object}[];
   onInit?: (client: AbexClient) => void;
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
-const AbexProvider: React.FC<AbexProviderProps> = ({ experimentKey, experimentData, onInit, children }) => {
-  const [variantKey, setVariantKey] = useState<string | null>(null);
-  const abexClient = new AbexClient(experimentKey, experimentData, async (client) => {
+const AbexProvider: React.FC<AbexProviderProps> = ({ experiments, onInit, children }) => {
+  const [variantKeys, setVariantKeys] = useState<Record<string, string | null>>({});
+  const abexClient = new AbexClient(experiments, async (client) => {
     if (onInit && typeof onInit === 'function') {
       onInit(client);
     }
   });
 
   useEffect(() => {
-    async function fetchVariantKey() {
-      const key = await abexClient.getVariantKey()
-      setVariantKey(key)
-      // You can store other variant details as well
+    async function fetchVariantKeys() {
+      let keys: Record<string, string | null> = {};
+
+      if (experiments.length > 1) {
+        keys = await abexClient.getVariantsInBatch();
+      } else if (experiments.length === 1) {
+        keys = await abexClient.getVariantKey();
+      }
+
+      setVariantKeys(keys);
     }
-    fetchVariantKey()
-  }, [experimentKey, experimentData])
 
-  return <AbexContext.Provider value={variantKey}>{children}</AbexContext.Provider>
-}
+    if (experiments.length > 0) {
+      fetchVariantKeys();
+    }
+  }, [experiments]);
 
-export default AbexProvider
+  return <AbexContext.Provider value={variantKeys}>{children}</AbexContext.Provider>;
+};
+
+export default AbexProvider;
