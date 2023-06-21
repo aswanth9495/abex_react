@@ -3,7 +3,7 @@ import AbexClient from '../utils/abexClient';
 import { AbexContext } from '../context';
 
 interface AbexProviderProps {
-  experiments: {experimentKey: string, experimentData: object}[];
+  experiments: { experimentKey: string; experimentData: object }[];
   onInit?: (client: AbexClient) => void;
   children: React.ReactNode;
 }

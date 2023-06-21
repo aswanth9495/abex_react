@@ -6,12 +6,11 @@ interface AbexSwitchProps {
   children: ReactNode;
 }
 
-
 /**
- * The AbexSwitch component is a higher-level component 
- * that allows rendering different content based on the 
- * assigned variant key. It acts as a switch statement to 
- * conditionally render the appropriate content based 
+ * The AbexSwitch component is a higher-level component
+ * that allows rendering different content based on the
+ * assigned variant key. It acts as a switch statement to
+ * conditionally render the appropriate content based
  * on the assigned variant key.
  */
 

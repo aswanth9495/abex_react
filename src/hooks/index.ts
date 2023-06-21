@@ -1,1 +1,1 @@
-export { default as useAbex } from './useAbex'
+export { default as useAbex } from './useAbex';

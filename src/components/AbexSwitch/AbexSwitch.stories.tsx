@@ -8,7 +8,6 @@ import AbexCase from '../AbexCase/AbexCase';
 const meta: Meta<typeof AbexSwitch> = {
   tags: ['autodocs'],
   component: AbexSwitch,
-
 };
 
 export default meta;
@@ -21,8 +20,10 @@ type Story = StoryObj<typeof AbexSwitch>;
  */
 export const Default: Story = {
   name: 'Example',
-  render: () => <AbexSwitch experimentKey="experiment1">
-    <AbexCase variant="default">Default Case</AbexCase>
-    <AbexCase variant="sample_variant">Sample Case</AbexCase>
-  </AbexSwitch>,
+  render: () => (
+    <AbexSwitch experimentKey="experiment1">
+      <AbexCase variant="default">Default Case</AbexCase>
+      <AbexCase variant="sample_variant">Sample Case</AbexCase>
+    </AbexSwitch>
+  ),
 };

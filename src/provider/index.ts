@@ -1,1 +1,1 @@
-export { default as AbexProvider } from './AbexProvider'
+export { default as AbexProvider } from './AbexProvider';

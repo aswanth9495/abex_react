@@ -1,1 +1,1 @@
-export { default as AbexContext } from './AbexContext'
+export { default as AbexContext } from './AbexContext';
