@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import AbexClient from '../utils/abexClient';
+
 import { AbexContext } from '../context';
+import AbexClient from '../utils/abexClient';
 
 interface AbexProviderProps {
   experiments: { experimentKey: string; experimentData: object }[];
@@ -8,8 +9,14 @@ interface AbexProviderProps {
   children: React.ReactNode;
 }
 
-const AbexProvider: React.FC<AbexProviderProps> = ({ experiments, onInit, children }) => {
-  const [variantKeys, setVariantKeys] = useState<Record<string, string | null>>({});
+const AbexProvider: React.FC<AbexProviderProps> = ({
+  experiments,
+  onInit,
+  children,
+}) => {
+  const [variantKeys, setVariantKeys] = useState<Record<string, string | null>>(
+    {},
+  );
   const abexClient = new AbexClient(experiments, async (client) => {
     if (onInit && typeof onInit === 'function') {
       onInit(client);
@@ -34,7 +41,9 @@ const AbexProvider: React.FC<AbexProviderProps> = ({ experiments, onInit, childr
     }
   }, [experiments]);
 
-  return <AbexContext.Provider value={variantKeys}>{children}</AbexContext.Provider>;
+  return (
+    <AbexContext.Provider value={variantKeys}>{children}</AbexContext.Provider>
+  );
 };
 
 export default AbexProvider;

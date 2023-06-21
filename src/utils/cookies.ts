@@ -1,7 +1,7 @@
 /**
  * Returns the content of a cookie
  * @param name Cookie name
- * @returns 
+ * @returns
  */
 export function getCookie(name: string): string | null {
   const cookies = document.cookie.split(';');

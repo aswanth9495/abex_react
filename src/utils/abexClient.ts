@@ -7,15 +7,19 @@ import { getCookie } from './cookies';
  */
 class AbexClient {
   private token: string | null;
-  private experiments: { experimentKey: string; experimentData: object; }[];
+  private experiments: { experimentKey: string; experimentData: object }[];
   private experimentCache: Record<string, string | null>;
 
   /**
    * Creates an instance of AbexClient.
    * @param experiments - Array of experiments to be handled.
-   * @param callback - Optional callback function to be called after the AbexClient instance is created.
+   * @param callback - Optional callback function to be called
+   * after the AbexClient instance is created.
    */
-  constructor(experiments: { experimentKey: string; experimentData: object; }[], callback?: (client: AbexClient) => void) {
+  constructor(
+    experiments: { experimentKey: string; experimentData: object }[],
+    callback?: (client: AbexClient) => void,
+  ) {
     this.token = null;
     this.experiments = experiments;
     this.experimentCache = this.getExperimentCache();
@@ -38,7 +42,7 @@ class AbexClient {
           return cacheData.experiments;
         }
       } catch (error) {
-        console.error('Error parsing experiment cache cookie:', error);
+        // handle Error
       }
     }
     return {};
@@ -54,7 +58,8 @@ class AbexClient {
 
   /**
    * Retrieves the variant key for each experiment.
-   * @returns A promise resolving to an object containing the experiment keys and their corresponding variant keys.
+   * @returns A promise resolving to an object containing the experiment
+   *  keys and their corresponding variant keys.
    */
   public async getVariantKey(): Promise<Record<string, string | null>> {
     const variantKeys: Record<string, string | null> = {};
@@ -74,7 +79,7 @@ class AbexClient {
             constraints: experiment.experimentData,
           },
         });
-        variantKeys[experiment.experimentKey] = response.data.variant_key;
+        variantKeys[experiment.experimentKey] = response.data.variantKey;
       } catch (error) {
         // Add error handling here
       }
@@ -85,11 +90,15 @@ class AbexClient {
 
   /**
    * Retrieves the variant keys for experiments in batch.
-   * @returns A promise resolving to an object containing the experiment keys and their corresponding variant keys.
+   * @returns A promise resolving to an object containing
+   * the experiment keys and their corresponding variant keys.
    */
   public async getVariantsInBatch(): Promise<Record<string, string | null>> {
     const variantKeys: Record<string, string | null> = {};
-    const experimentsToFetch: { experimentKey: string; experimentData: object; }[] = [];
+    const experimentsToFetch: {
+      experimentKey: string;
+      experimentData: object;
+    }[] = [];
 
     for (const experiment of this.experiments) {
       const cachedVariantKey = this.experimentCache[experiment.experimentKey];
@@ -113,7 +122,7 @@ class AbexClient {
         });
 
         response.data.forEach((result: any) => {
-          variantKeys[result.key] = result.variant_key;
+          variantKeys[result.key] = result.variantKey;
         });
       } catch (error) {
         // Add error handling here

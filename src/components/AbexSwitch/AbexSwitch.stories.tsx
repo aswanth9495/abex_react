@@ -1,9 +1,8 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import type { Meta, StoryObj } from '@storybook/react';
-
-import AbexSwitch from './AbexSwitch';
 import AbexCase from '../AbexCase/AbexCase';
+import AbexSwitch from './AbexSwitch';
 
 const meta: Meta<typeof AbexSwitch> = {
   tags: ['autodocs'],
@@ -14,7 +13,8 @@ export default meta;
 
 type Story = StoryObj<typeof AbexSwitch>;
 /*
- *👇 Render functions are a framework specific feature to allow you control on how the component renders.
+ *👇 Render functions are a framework specific feature to
+ * allow you control on how the component renders.
  * See https://storybook.js.org/docs/react/api/csf
  * to learn how to use render functions.
  */

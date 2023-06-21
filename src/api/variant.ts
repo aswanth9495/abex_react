@@ -1,9 +1,15 @@
 // import { apiRequest } from '../utils/api';
 // import { ABEX_API_BASE_URL } from '../utils/constants';
 
-export function fetchVariant({ token, flag }: { token: string; flag: object }): {
+export function fetchVariant({
+  token,
+  flag,
+}: {
+  token: string;
+  flag: object;
+}): {
   data: {
-    variant_key: string;
+    variantKey: string;
     token: string;
     flag: object;
   };
@@ -18,7 +24,7 @@ export function fetchVariant({ token, flag }: { token: string; flag: object }): 
   // );
   return {
     data: {
-      variant_key: 'A',
+      variantKey: 'A',
       token,
       flag,
     },
@@ -30,10 +36,12 @@ export function fetchVariantsInBatch({
   flags,
 }: {
   token: string;
-  flags: { key: string; constraints: any }[];
+  flags: { key: string; constraints: object }[];
 }): {
+  token: string;
+  flags: { key: string; constraints: object }[];
   data: {
-    variant_key: string;
+    variantKey: string;
     key: string;
   }[];
 } {
@@ -46,14 +54,16 @@ export function fetchVariantsInBatch({
   //   },
   // );
   return {
+    token,
+    flags,
     data: [
       {
         key: 'experiment1',
-        variant_key: 'A',
+        variantKey: 'A',
       },
       {
         key: 'experiment2',
-        variant_key: 'B',
+        variantKey: 'B',
       },
     ],
   };

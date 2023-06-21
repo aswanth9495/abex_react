@@ -12,8 +12,9 @@ interface AbexCaseProps {
  * on the variant assigned to the user.
  */
 
-const AbexCase: React.FC<AbexCaseProps> = ({ variant, children }) => (
-  <React.Fragment>{children}</React.Fragment>
-);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const AbexCase: React.FC<AbexCaseProps> = ({ variant, children }) => {
+  return <React.Fragment>{children}</React.Fragment>;
+};
 
 export default AbexCase;

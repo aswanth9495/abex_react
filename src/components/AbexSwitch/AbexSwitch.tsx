@@ -1,4 +1,5 @@
-import React, { useContext, ReactNode } from 'react';
+import React, { ReactNode, useContext } from 'react';
+
 import { AbexContext } from '../../context';
 
 interface AbexSwitchProps {
