@@ -273,10 +273,6 @@ The `getVariantKey` method retrieves the variant key for each experiment in the 
 abexClient.getVariantKey(): Promise<Record<string, string | null>>
 ```
 
-| Return Type                         | Description                                      |
-| ----------------------------------- | ------------------------------------------------ |
-| `Promise<Record<string, string | null>>` | A promise resolving to an object with experiment keys and their corresponding variant keys. |
-
 #### Example
 
 ```jsx
@@ -295,10 +291,6 @@ The `getVariantsInBatch` method retrieves the variant keys for experiments in ba
 ```typescript
 abexClient.getVariantsInBatch(): Promise<Record<string, string | null>>
 ```
-
-| Return Type                         | Description                                      |
-| ----------------------------------- | ------------------------------------------------ |
-| `Promise<Record<string, string | null>>` | A promise resolving to an object with experiment keys and their corresponding variant keys. |
 
 #### Example
 
